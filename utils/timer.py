@@ -16,11 +16,13 @@ class Timer(object):
         self.average_time = 0.
         self.remain_time = 0.
 
+    #计时器开始
     def tic(self):
         # using time.time instead of time.clock because time time.clock
         # does not normalize for multithreading
         self.start_time = time.time()
 
+    #计算一次时间，返回平均每次调用的时间，或者计时器启动以来的时间
     def toc(self, average=True):
         self.diff = time.time() - self.start_time
         self.total_time += self.diff
@@ -31,6 +33,7 @@ class Timer(object):
         else:
             return self.diff
 
+    #估计剩余时间——根据总迭代次数和当前迭代次数
     def remain(self, iters, max_iters):
         if iters == 0:
             self.remain_time = 0
